@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SuperLearn</string>
+    <string name="theme_name">Theme name</string>
+    <string name="name">Name</string>
+    <string name="add_theme">Add theme</string>
+    <string name="theory">Theory</string>
+    <string name="test">Test</string>
+    <string name="back">Back</string>
+    <string name="delete_theme">Delete theme</string>
+    <string name="add_photo_video">Add photo/video</string>
+    <string name="add_question">Add question</string>
+    <string name="question_text">Question text</string>
+    <string name="answer_1">Answer 1</string>
+    <string name="answer_2">Answer 2</string>
+    <string name="answer_3">Answer 3</string>
+    <string name="answer_4">Answer 4</string>
+    <string name="save_and_add_new_question">Save and add new Question</string>
+    <string name="delete_question">Delete question</string>
+    <string name="retry">Retry</string>
 </resources>
