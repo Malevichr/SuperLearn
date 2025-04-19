@@ -1,5 +1,6 @@
 package ru.malevichrp.superlearn
 
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import org.junit.Before
 import org.junit.Rule
@@ -7,9 +8,9 @@ import org.junit.Test
 
 class ScenarioTest {
     private lateinit var loadPage: LoadPage;
-    private lateinit var themesPage: ThemesPage;
-    private lateinit var themePage: ThemePage;
-    private lateinit var theoryPage: TheoryPage;
+    private lateinit var themesPage: EditThemesPage;
+    private lateinit var themePage: EditThemePage;
+    private lateinit var theoryPage: EditTheoryPage;
     private lateinit var editTestPage: EditTestPage;
     private lateinit var editQuestionPage: EditQuestionPage;
 
@@ -80,10 +81,15 @@ class ScenarioTest {
     fun case1(){
         doWithRecreate { loadPage.assertProgressState() }
 
-        loadPage.whaitTillError()
+        loadPage.waitTillError()
         doWithRecreate { loadPage.assertErrorState() }
 
-        loadPage.whaitTillGone()
+        loadPage.clickRetry()
+        doWithRecreate {
+            loadPage.assertProgressState()
+        }
+
+        loadPage.waitTillGone()
 
         doWithRecreate {
             themesPage.assertNoThemes()
@@ -91,13 +97,13 @@ class ScenarioTest {
 
         themesPage.clickAddTheme()
         doWithRecreate {
-            themesPage.assertWithTitle("Theme 1")
+            themesPage.assertFirstThemeWithTitle("Theme 1")
         }
 
         themePage.renameTitle("Big theme")
         themePage.clickBack()
         doWithRecreate {
-            themesPage.assertOneThemeWithText("Big theme")
+            themesPage.assertFirstThemeWithTitle("Big theme")
         }
 
         themesPage.clickThemeWithText("Big theme")
@@ -115,21 +121,21 @@ class ScenarioTest {
             theoryPage.assertOnlyText("Very long text")
         }
 
-        themePage.clickAddMedia()
+        theoryPage.clickAddMedia()
         doWithRecreate {
             theoryPage.assertOneImageAndText("Very long text")
         }
 
         val deleteDialog = DeleteDialog()
-        themePage.holdImage()
+        theoryPage.holdImage()
         deleteDialog.assertVisible()
 
         deleteDialog.clickYes()
         doWithRecreate {
-            themePage.assertOnlyText("Very long text")
+            theoryPage.assertOnlyText("Very long text")
         }
 
-        themePage.clickBack()
+        theoryPage.clickBack()
         doWithRecreate {
             themePage.assertWithTitle("Big theme")
         }
@@ -151,7 +157,7 @@ class ScenarioTest {
 
         editQuestionPage.clickSaveAndAdd()
         doWithRecreate {
-            editQuestionPage.assertWithQuestion(TestQuestion.Idle)
+            editQuestionPage.assertWithQuestion(TestQuestions.Idle)
         }
 
         editQuestionPage.enterQuestion(TestQuestions.Number2)
