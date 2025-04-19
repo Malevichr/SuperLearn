@@ -12,7 +12,7 @@
         android:layout_margin="8dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextMulti"
+            android:id="@+id/editQuestionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/question_text"
@@ -25,6 +25,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -43,7 +44,7 @@
                 android:padding="8dp">
 
                 <EditText
-                    android:id="@+id/inputFirstText"
+                    android:id="@+id/firstAnswerInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="true"
@@ -73,7 +74,7 @@
                 android:padding="8dp">
 
                 <EditText
-                    android:id="@+id/inputSecondText"
+                    android:id="@+id/secondAnswerInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="true"
@@ -103,7 +104,7 @@
                 android:padding="8dp">
 
                 <EditText
-                    android:id="@+id/inputThirdText"
+                    android:id="@+id/thirdAnswerInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="true"
@@ -133,7 +134,7 @@
                 android:padding="8dp">
 
                 <EditText
-                    android:id="@+id/inputFourthText"
+                    android:id="@+id/fourthAnswerInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="true"
