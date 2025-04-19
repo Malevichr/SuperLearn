@@ -13,12 +13,10 @@ import org.hamcrest.Matchers.not
 
 interface ProgressUi : Visible {
     class Base(containerMatcher: Matcher<View>) : AbstractUi(
-        onView(
-            allOf(
-                withId(R.id.progressBar),
-                isAssignableFrom(ProgressBar::class.java),
-                containerMatcher
-            )
+        allOf(
+            withId(R.id.progressBar),
+            isAssignableFrom(ProgressBar::class.java),
+            containerMatcher
         )
     ), ProgressUi
 }

@@ -28,7 +28,7 @@ class EditThemesPage {
     private val textItemUi = TextItemUi.Base(
         R.id.text_item,
         containerMatcher,
-        recyclerViewMatcher = recyclerUi.recyclerViewMatcher,
+        recyclerViewMatcher = recyclerUi.recyclerViewMatcher(),
         position = 0
     )
     private val addThemeButtonUi: ButtonUi = ButtonUi.Base(

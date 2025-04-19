@@ -5,12 +5,10 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import ru.malevichrp.superlearn.core.matchers.waitTillDisplayed
-import ru.malevichrp.superlearn.core.matchers.waitTillDoesNotExist
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 
-interface TextUi: Visible{
+interface TextUi : Visible {
     fun waitTillVisible()
     fun waitTillNotExist()
     class Base(
@@ -18,12 +16,10 @@ interface TextUi: Visible{
         text: Int,
         containerMatcher: Matcher<View>
     ) : AbstractUi(
-        onView(
-            allOf(
-                withId(id),
-                withText(text),
-                containerMatcher
-            )
+        allOf(
+            withId(id),
+            withText(text),
+            containerMatcher
         )
     ), TextUi {
         override fun waitTillVisible() {
