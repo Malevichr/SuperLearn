@@ -7,7 +7,7 @@ import ru.malevichrp.superlearn.core.di.ManageViewModels
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
 
-class UGApp : Application(), ProvideViewModel {
+class SLApp : Application(), ProvideViewModel {
     private lateinit var viewModelFactory: ManageViewModels
     override fun onCreate() {
         super.onCreate()
