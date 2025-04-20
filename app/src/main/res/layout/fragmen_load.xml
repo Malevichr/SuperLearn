@@ -7,12 +7,12 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ProgressBar
+    <ru.malevichrp.superlearn.views.progress.ProgressView
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <ru.malevichrp.superlearn.views.errortext.ErrorTextView
         android:id="@+id/errorTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:padding="8dp"
         tools:text="Error"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ru.malevichrp.superlearn.views.visibilitybutton.VisibilityButton
         android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
