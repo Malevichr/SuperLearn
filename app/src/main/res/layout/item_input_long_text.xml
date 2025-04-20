@@ -11,4 +11,5 @@
     android:focusableInTouchMode="true"
     android:overScrollMode="never"
     android:background="@null"
+    android:freezesText="true"
     xmlns:android="http://schemas.android.com/apk/res/android" />

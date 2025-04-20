@@ -6,4 +6,5 @@
     android:padding="16dp"
     android:maxLines="1"
     android:ellipsize="end"
+    android:freezesText="true"
     android:clickable="true"/>
