@@ -1,6 +1,7 @@
 package ru.malevichrp.superlearn.core.di
 
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
+import ru.malevichrp.superlearn.fragments.themes.ProvideThemesViewModel
 
 interface ProvideViewModel {
     fun <T : MyViewModel> provideViewModel(clazz: Class<T>): T
@@ -11,6 +12,7 @@ interface ProvideViewModel {
 
         init {
             chain = Error()
+            chain = ProvideThemesViewModel(core, chain)
         }
 
         override fun <T : MyViewModel> provideViewModel(clazz: Class<T>): T =

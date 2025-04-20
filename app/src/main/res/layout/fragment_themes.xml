@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="8dp">
+    android:layout_margin="16dp">
 
     <TextView
         android:id="@+id/fullNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:layout_margin="8dp"/>
+        android:text="@string/name"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/themesRecycler"
@@ -21,7 +20,7 @@
         android:layout_weight="1"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ru.malevichrp.superlearn.views.visibilitybutton.VisibilityButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addThemeButton"
