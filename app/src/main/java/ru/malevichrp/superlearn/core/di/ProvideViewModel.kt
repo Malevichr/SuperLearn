@@ -1,7 +1,11 @@
 package ru.malevichrp.superlearn.core.di
 
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
+import ru.malevichrp.superlearn.fragments.editQuestion.ProvideEditQuestionViewModel
 import ru.malevichrp.superlearn.fragments.editTest.ProvideEditTestViewModel
+import ru.malevichrp.superlearn.fragments.quiz.game.di.ProvideGameViewModel
+import ru.malevichrp.superlearn.fragments.quiz.gameover.di.ProvideGameOverViewModel
+import ru.malevichrp.superlearn.fragments.quiz.load.di.ProvideLoadViewModel
 import ru.malevichrp.superlearn.fragments.theme.ProvideThemeViewModel
 import ru.malevichrp.superlearn.fragments.themes.ProvideThemesViewModel
 
@@ -17,6 +21,10 @@ interface ProvideViewModel {
             chain = ProvideThemesViewModel(core, chain)
             chain = ProvideThemeViewModel(core, chain)
             chain = ProvideEditTestViewModel(core, chain)
+            chain = ProvideEditQuestionViewModel(core, chain)
+            chain = ProvideGameViewModel(core, chain)
+            chain = ProvideGameOverViewModel(core, chain)
+            chain = ProvideLoadViewModel(core, chain)
         }
 
         override fun <T : MyViewModel> provideViewModel(clazz: Class<T>): T =

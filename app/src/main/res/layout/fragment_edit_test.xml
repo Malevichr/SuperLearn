@@ -26,7 +26,12 @@
         android:id="@+id/addQuestionButton"
         android:layout_gravity="center"
         android:text="@string/add_question"/>
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/startTestButton"
+        android:layout_gravity="center"
+        android:text="@string/start_test"/>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

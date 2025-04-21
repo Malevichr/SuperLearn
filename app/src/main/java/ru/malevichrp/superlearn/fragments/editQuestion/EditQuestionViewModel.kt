@@ -1,0 +1,44 @@
+package ru.malevichrp.superlearn.fragments.editQuestion
+
+import android.os.SystemClock.sleep
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import ru.malevichrp.superlearn.core.presentation.MyViewModel
+import ru.malevichrp.superlearn.core.presentation.RunAsync
+
+class EditQuestionViewModel(
+    private val repository: EditQuestionRepository,
+    private val runAsync: RunAsync
+) : MyViewModel {
+    private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+
+    fun deleteQuestion() {
+        viewModelScope.launch (Dispatchers.IO){
+            repository.deleteTargetQuestion()
+        }
+    }
+
+    fun saveQuestion(question: Question) {
+        viewModelScope.launch (Dispatchers.IO){
+            repository.saveQuestion(question)
+        }
+    }
+
+    fun initQuestion(callback: (Question) -> Unit) {
+        runAsync.runAsync(
+            viewModelScope,
+            heavyOperation = {
+                repository.targetQuestion()
+            },
+            uiUpdate = {
+                callback.invoke(it)
+            }
+        )
+    }
+
+    fun addNewQuestion(callback: (Question) -> Unit) {
+
+    }
+}

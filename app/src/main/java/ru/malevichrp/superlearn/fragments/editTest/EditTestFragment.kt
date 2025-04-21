@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import ru.malevichrp.superlearn.GoBack
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
 import ru.malevichrp.superlearn.core.presentation.AbstractFragment
+import ru.malevichrp.superlearn.core.presentation.Navigate
 import ru.malevichrp.superlearn.databinding.FragmentEditTestBinding
 import ru.malevichrp.superlearn.fragments.editQuestion.NavigateToEditQuestion
+import ru.malevichrp.superlearn.fragments.theme.NavigateToTheme
 import ru.malevichrp.superlearn.views.recycler.TextAdapter
 
 class EditTestFragment :
@@ -31,10 +33,13 @@ class EditTestFragment :
         }
         binding.testsRecycler.adapter = adapter
         binding.backButton.setOnClickListener {
-            (requireActivity() as GoBack).goBack()
+            (requireActivity() as Navigate).navigateToTheme()
         }
         binding.addQuestionButton.setOnClickListener {
             viewModel.addQuestion()
+        }
+        binding.startTestButton.setOnClickListener {
+            (requireActivity() as Navigate).navigateToLoad()
         }
         viewModel.loadThemes()
     }
