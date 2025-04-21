@@ -36,6 +36,6 @@ class ThemesFragment :
             viewModel.createTheme()
         }
         binding.themesRecycler.adapter = textAdapter
-        viewModel.loadThemes(savedInstanceState == null)
+        viewModel.loadThemes()
     }
 }

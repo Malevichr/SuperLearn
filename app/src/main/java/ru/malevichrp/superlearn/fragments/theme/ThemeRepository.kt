@@ -32,8 +32,10 @@ interface ThemeRepository {
             isEdit.read()
 
         override fun createNewTheme() {
-            if (targetIsNew.read())
+            if (targetIsNew.read()) {
                 ThemesList.list.add(themeText())
+                targetIsNew.save(false)
+            }
         }
     }
 }
