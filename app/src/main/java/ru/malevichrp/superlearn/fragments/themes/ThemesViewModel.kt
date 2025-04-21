@@ -21,13 +21,20 @@ class ThemesViewModel(
         repository.changeTargetTheme("New Theme", true)
         uiObservable.postUiState(ThemesUiState.NavigateToThemeFragment)
     }
-
-    fun loadThemes() {
+    private var processDeath: Boolean = true
+    private val themes: ArrayList<CharSequence> = arrayListOf()
+    fun loadThemes(isFirstRun: Boolean = true) {
         handleAsync {
-            val themes = try {
-                repository.loadThemes()
-            } catch (_: Exception) {
-                arrayListOf()
+            if (isFirstRun or processDeath) {
+                processDeath = false
+                themes.clear()
+                themes.addAll(
+                    try {
+                        repository.loadThemes()
+                    } catch (_: Exception) {
+                        arrayListOf()
+                    }
+                )
             }
             if (repository.isEdit())
                 ThemesUiState.Editable(themes)

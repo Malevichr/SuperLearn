@@ -29,6 +29,7 @@ interface Screen {
             fragmentManager.beginTransaction()
                 .replace(containerId, makeFragment())
                 .addToBackStack(name)
+                .setReorderingAllowed(true)
                 .commit()
         }
 

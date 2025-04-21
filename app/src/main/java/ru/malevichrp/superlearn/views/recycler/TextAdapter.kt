@@ -1,8 +1,10 @@
 package ru.malevichrp.superlearn.views.recycler
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.malevichrp.superlearn.databinding.ItemTextBinding
@@ -15,7 +17,7 @@ class TextAdapter(
     fun addAll(textItems: ArrayList<CharSequence>) {
         this.textItems.clear()
         this.textItems.addAll(textItems)
-        notifyItemRangeChanged(0, this.textItems.size)
+        notifyItemRangeChanged(0, textItems.size)
     }
 
     fun save(bundle: Bundle) {
@@ -23,8 +25,8 @@ class TextAdapter(
     }
 
     fun restore(bundle: Bundle) {
-        textItems.addAll(bundle.getCharSequenceArrayList(KEY) ?: arrayListOf())
-        notifyItemRangeChanged(0, textItems.size)
+        val data  = bundle.getCharSequenceArrayList(KEY)
+        addAll(data ?: arrayListOf())
     }
 
     private companion object {
@@ -39,6 +41,31 @@ class TextAdapter(
 
     override fun onBindViewHolder(holder: TextViewHolder, position: Int) {
         holder.bind(textItems[position])
+    }
+    private inner class DiffUtilCallback(
+        private val newList: ArrayList<CharSequence>,
+    ) : DiffUtil.Callback() {
+
+        override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any {
+            return true
+        }
+
+        override fun getOldListSize(): Int {
+            return textItems.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newList.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return textItems[oldItemPosition] == newList[newItemPosition]
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return textItems[oldItemPosition] == newList[newItemPosition]
+        }
+
     }
 }
 
