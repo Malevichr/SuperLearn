@@ -20,7 +20,7 @@ class ProvideThemesViewModel(
 
 class ThemesModule(private val core: Core) : Module<ThemesViewModel>{
     override fun viewModel(): ThemesViewModel {
-        val repository = ThemesRepository.Base(
+        val repository = ThemesRepository.Fake(
             targetIsNew = BooleanCache.Base(core.sharedPreferences, "targetIsNew", false),
             targetThemeText = StringCache.Base(core.sharedPreferences, "targetThemeText", "New Theme")
         )
