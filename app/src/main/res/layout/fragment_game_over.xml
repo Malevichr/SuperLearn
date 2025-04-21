@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameOverContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.statstextview.StatsTextView
+        android:id="@+id/statsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:text="Game over" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/newGameButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        android:background="@color/blue"
+        android:padding="24dp"
+        android:text="@string/back" />
+
+</FrameLayout>
