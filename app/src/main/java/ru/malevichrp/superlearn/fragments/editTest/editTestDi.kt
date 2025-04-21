@@ -6,29 +6,30 @@ import ru.malevichrp.superlearn.core.di.Core
 import ru.malevichrp.superlearn.core.di.Module
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
-import ru.malevichrp.superlearn.fragments.theme.ThemeRepository
-import ru.malevichrp.superlearn.fragments.theme.ThemeViewModel
 
-class ProvideThemeViewModel(
+class ProvideEditTestViewModel(
     core: Core,
     nextLink: ProvideViewModel
-) : ProvideViewModel.AbstractChainLink(
-    core,
-    nextLink,
-    ThemeViewModel::class.java
-) {
-    override fun module(): Module<out MyViewModel> = ThemeModule(core)
-}
+    ) : ProvideViewModel.AbstractChainLink(
+        core,
+        nextLink,
+        EditTestViewModel::class.java
+    )
+{
+    override fun module(): Module<out MyViewModel> =
+        EditTestModule(core)
 
-class ThemeModule(private val core: Core) : Module<ThemeViewModel> {
-    override fun viewModel(): ThemeViewModel {
-        val repository = ThemeRepository.Fake(
-            targetIsNew = BooleanCache.Base(core.sharedPreferences, "targetIsNew", false),
-            targetThemeText = StringCache.Base(core.sharedPreferences, "targetThemeText", "New Theme"),
-            isEdit = BooleanCache.Base(core.sharedPreferences, "isEdit", true)
+}
+class EditTestModule(private val core: Core): Module<EditTestViewModel> {
+    override fun viewModel(): EditTestViewModel {
+        val repository = EditTestRepository.Fake(
+            targetEditQuestionText = StringCache.Base(core.sharedPreferences, "targetEditQuestionText", "new question"),
+            targetEditQuestionIsNew = BooleanCache.Base(core.sharedPreferences, "targetEditQuestionIsNew", true)
         )
-        return ThemeViewModel(
-            repository
+        return EditTestViewModel(
+            repository,
+            core.runAsync,
+            EditTestUiObservable.Base()
         )
     }
 }

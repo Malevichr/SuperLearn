@@ -17,20 +17,7 @@ class TextAdapter(
     fun addAll(textItems: ArrayList<CharSequence>) {
         this.textItems.clear()
         this.textItems.addAll(textItems)
-        notifyItemRangeChanged(0, textItems.size)
-    }
-
-    fun save(bundle: Bundle) {
-        bundle.putCharSequenceArrayList(KEY, textItems)
-    }
-
-    fun restore(bundle: Bundle) {
-        val data  = bundle.getCharSequenceArrayList(KEY)
-        addAll(data ?: arrayListOf())
-    }
-
-    private companion object {
-        private const val KEY = "TextAdapterKey"
+        notifyItemRangeChanged(0, textItems.size+1)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextViewHolder =
