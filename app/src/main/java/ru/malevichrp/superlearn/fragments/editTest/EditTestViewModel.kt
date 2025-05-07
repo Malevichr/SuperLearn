@@ -2,6 +2,7 @@ package ru.malevichrp.superlearn.fragments.editTest
 
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
 import ru.malevichrp.superlearn.core.presentation.RunAsync
+import ru.malevichrp.superlearn.views.recycler.TextItems
 
 class EditTestViewModel(
     private val repository: EditTestRepository,
@@ -12,7 +13,7 @@ class EditTestViewModel(
     editTestUiObservable
 ) {
     fun addQuestion() {
-        repository.changeTargetEdiQuestion("New question", isNew = true)
+        repository.changeTargetEdiQuestion(-1, isNew = true)
         editTestUiObservable.postUiState(EditTestUiState.NavigateToEditQuestionState())
     }
 
@@ -21,14 +22,14 @@ class EditTestViewModel(
             val themes = try {
                 repository.loadQuestions()
             } catch (_: Exception) {
-                arrayListOf()
+                TextItems()
             }
             EditTestUiState.ShowQuestions(themes)
         }
     }
 
-    fun navigateToTargetQuestion(questionText: String) {
-        repository.changeTargetEdiQuestion(questionText, isNew = false)
+    fun navigateToTargetQuestion(questionId: Int) {
+        repository.changeTargetEdiQuestion(questionId, isNew = false)
         editTestUiObservable.postUiState(EditTestUiState.NavigateToEditQuestionState())
     }
 }

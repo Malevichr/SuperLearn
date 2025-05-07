@@ -30,6 +30,5 @@ interface IntCache {
             save(defaultValue)
             return defaultValue
         }
-
     }
 }

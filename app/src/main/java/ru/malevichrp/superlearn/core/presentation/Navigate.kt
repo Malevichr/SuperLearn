@@ -1,5 +1,6 @@
 package ru.malevichrp.superlearn.core.presentation
 
+import android.util.Log
 import ru.malevichrp.superlearn.fragments.editQuestion.EditQuestionScreen
 import ru.malevichrp.superlearn.fragments.editQuestion.NavigateToEditQuestion
 import ru.malevichrp.superlearn.fragments.editTest.EditTestScreen
@@ -32,6 +33,7 @@ interface Navigate : NavigateToTheme, NavigateToThemes,
     }
 
     override fun navigateToEditTest() {
+        Log.d("mlvc", "Navigate to edit test")
         navigate(EditTestScreen)
     }
 
@@ -40,18 +42,22 @@ interface Navigate : NavigateToTheme, NavigateToThemes,
     }
 
     override fun navigateToQuiz() {
+        Log.d("mlvc", "Navigate to quiz")
         navigateToLoad()
     }
 
     override fun navigateToEditQuestion() {
+        Log.d("mlvc", "Navigate to edit question")
         navigate(EditQuestionScreen)
     }
 
     override fun navigateToGame() {
+        Log.d("mlvc", "Navigate to game")
         navigate(GameScreen)
     }
 
     override fun navigateToGameOver() {
+        Log.d("mlvc", "Navigate to game over")
         navigate(GameOverScreen)
     }
 

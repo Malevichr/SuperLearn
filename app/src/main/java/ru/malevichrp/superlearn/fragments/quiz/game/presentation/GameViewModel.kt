@@ -1,9 +1,11 @@
 package ru.malevichrp.superlearn.fragments.quiz.game.presentation
 
+import android.util.Log
 import ru.malevichrp.superlearn.core.di.ClearViewModel
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
 import ru.malevichrp.superlearn.core.presentation.RunAsync
 import ru.malevichrp.superlearn.fragments.quiz.game.data.GameRepository
+import ru.malevichrp.superlearn.fragments.quiz.game.data.LastQuestionException
 import ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.ChoiceUiState
 
 class GameViewModel(
@@ -85,29 +87,36 @@ class GameViewModel(
     }
 
     fun next() {
-        if (repository.isLastQuestion()) {
+        try {
+            repository.next()
+            init()
+        } catch (e: LastQuestionException) {
             handleAsync {
                 repository.clearProgress()
                 clearViewModel.clear(GameViewModel::class.java)
                 GameUiState.Finish
             }
-
-        } else {
-            repository.next()
-            init()
         }
     }
 
     fun init(firstRun: Boolean = true) {
         handleAsync {
-            if (firstRun) {
-                val data = repository.questionAndChoices()
-                GameUiState.AskedQuestion(
-                    data.question,
-                    data.listOf
-                )
+            val result = if (firstRun) {
+                try {
+                    val data = repository.questionAndChoices()
+                    Log.d("mlvc", data.question)
+                    GameUiState.AskedQuestion(
+                        data.question,
+                        data.listOf
+                    )
+                } catch (e: LastQuestionException) {
+                    repository.clearProgress()
+                    Log.d("mlvc", "no no")
+                    GameUiState.Finish
+                }
             } else
                 GameUiState.Empty
+            result
         }
     }
 }

@@ -1,6 +1,7 @@
 package ru.malevichrp.superlearn.fragments.editTest
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,18 +29,18 @@ class EditTestFragment :
         super.onViewCreated(view, savedInstanceState)
         viewModel =
             (requireActivity() as ProvideViewModel).provideViewModel(EditTestViewModel::class.java)
-        adapter = TextAdapter { text ->
-            viewModel.navigateToTargetQuestion(text)
+        adapter = TextAdapter { questionId ->
+            viewModel.navigateToTargetQuestion(questionId)
         }
         binding.testsRecycler.adapter = adapter
         binding.backButton.setOnClickListener {
-            (requireActivity() as Navigate).navigateToTheme()
+            (requireActivity() as GoBack).goBack()
         }
         binding.addQuestionButton.setOnClickListener {
             viewModel.addQuestion()
         }
         binding.startTestButton.setOnClickListener {
-            (requireActivity() as Navigate).navigateToLoad()
+            (requireActivity() as Navigate).navigateToGame()
         }
         viewModel.loadThemes()
     }

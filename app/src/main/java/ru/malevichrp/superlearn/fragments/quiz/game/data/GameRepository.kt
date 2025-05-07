@@ -1,8 +1,10 @@
 package ru.malevichrp.superlearn.fragments.quiz.game.data
 
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.ClearDatabase
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.QuestionAndChoicesDao
+import android.util.Log
+import ru.malevichrp.superlearn.data.learn.ClearDatabase
+import ru.malevichrp.superlearn.data.learn.QuestionAndChoicesDao
 import ru.malevichrp.superlearn.core.data.IntCache
+import java.lang.IllegalStateException
 
 interface GameRepository {
     suspend fun questionAndChoices(): QuestionAndChoices
@@ -25,13 +27,18 @@ interface GameRepository {
         private val incorrects: IntCache,
         private val dao: QuestionAndChoicesDao,
         private val clearDatabase: ClearDatabase,
-        private val size: Int
+        private val size: Int,
+        private val targetThemeId: IntCache
     ) : GameRepository {
         override suspend fun questionAndChoices(): QuestionAndChoices {
-            index.save(index.read() % size)
-            val id = index.read()
-            val question = dao.question(id)
-            val incorrects = dao.incorects(id)
+            val question = dao.getQuestionByThemeAndIndex(targetThemeId.read(), index.read())
+                ?: throw LastQuestionException().also {
+                    Log.d(
+                        "mlvc",
+                        targetThemeId.read().toString() + " " +  index.read() + "nothing"
+                    )
+                }
+            val incorrects = dao.incorects(question.id)
             val choices = (listOf(question.correctAnswer) + incorrects.map { it.choice }).shuffled()
 
             return QuestionAndChoices(
@@ -59,7 +66,7 @@ interface GameRepository {
         }
 
         override fun next() {
-            index.save((index.read() + 1) % size)
+            index.increment()
             userChoiceIndex.save(-1)
         }
 
@@ -69,9 +76,7 @@ interface GameRepository {
         override suspend fun clearProgress() {
             index.default()
             userChoiceIndex.default()
-            clearDatabase.clear()
         }
-
     }
 
     class Fake(
@@ -116,7 +121,7 @@ interface GameRepository {
         }
 
         override fun next() {
-            index.save((index.read() + 1) % list.size)
+            index.increment()
             userChoiceIndex.save(-1)
         }
 
@@ -128,6 +133,6 @@ interface GameRepository {
             userChoiceIndex.default()
         }
     }
-
 }
 
+class LastQuestionException : IllegalStateException("Last question")

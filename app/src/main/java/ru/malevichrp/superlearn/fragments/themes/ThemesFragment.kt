@@ -16,8 +16,8 @@ class ThemesFragment :
     override fun inflate(inflater: LayoutInflater, container: ViewGroup?): FragmentThemesBinding =
         FragmentThemesBinding.inflate(inflater, container, false)
 
-    private var textAdapter: TextAdapter = TextAdapter { themeText ->
-        viewModel.navigateToTheme(themeText)
+    private var textAdapter: TextAdapter = TextAdapter { themeId ->
+        viewModel.navigateToTheme(themeId)
     }
     override val update: (ThemesUiState) -> Unit = { uiState: ThemesUiState ->
         uiState.update(

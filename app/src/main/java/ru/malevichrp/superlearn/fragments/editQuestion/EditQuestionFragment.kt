@@ -41,7 +41,7 @@ class EditQuestionFragment : AbstractFragment.BindingUi<FragmentEditQuestionBind
                 binding.fourthAnswerInput.text.toString(),
                 rightAnswerIndex
             )
-            viewModel.saveQuestion(
+            viewModel.updateQuestion(
                 question = question
             )
         }

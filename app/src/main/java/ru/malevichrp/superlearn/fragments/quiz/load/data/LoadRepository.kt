@@ -1,10 +1,10 @@
 package ru.malevichrp.superlearn.fragments.quiz.load.data
 
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.ClearDatabase
+import ru.malevichrp.superlearn.data.learn.ClearDatabase
 import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.CloudDataSource
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.IncorrectCache
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.QuestionAndChoicesDao
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.QuestionCache
+import ru.malevichrp.superlearn.data.learn.IncorrectCache
+import ru.malevichrp.superlearn.data.learn.QuestionAndChoicesDao
+import ru.malevichrp.superlearn.data.learn.QuestionCache
 import kotlinx.coroutines.delay
 import okio.IOException
 
@@ -28,7 +28,12 @@ interface LoadRepository {
                                 IncorrectCache(questionId = index, choice = it)
                             }
                         dao.saveIncorrects(incorrects)
-                        QuestionCache(index, data.question, data.correctAnswer)
+                        QuestionCache(
+                            id =  index,
+                            themeId = 0,
+                            question = data.question,
+                            correctAnswer = data.correctAnswer
+                        )
                     }
                 dao.saveQuestions(questions)
             } catch (e: Exception) {

@@ -1,7 +1,7 @@
 package ru.malevichrp.superlearn.fragments.editTest
 
 import ru.malevichrp.superlearn.core.data.BooleanCache
-import ru.malevichrp.superlearn.core.data.StringCache
+import ru.malevichrp.superlearn.core.data.IntCache
 import ru.malevichrp.superlearn.core.di.Core
 import ru.malevichrp.superlearn.core.di.Module
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
@@ -22,9 +22,11 @@ class ProvideEditTestViewModel(
 }
 class EditTestModule(private val core: Core): Module<EditTestViewModel> {
     override fun viewModel(): EditTestViewModel {
-        val repository = EditTestRepository.Fake(
-            targetEditQuestionText = StringCache.Base(core.sharedPreferences, "targetEditQuestionText", "new question"),
-            targetEditQuestionIsNew = BooleanCache.Base(core.sharedPreferences, "targetEditQuestionIsNew", true)
+        val repository = EditTestRepository.Base(
+            targetThemeId = core.sharedCollection.targetThemeId,
+            targetEditQuestionId = core.sharedCollection.targetEditQuestionId,
+            targetEditQuestionIsNew = core.sharedCollection.targetEditQuestionIsNew,
+            questionAndChoicesDao = core.cacheModule.questionAndChoicesDao()
         )
         return EditTestViewModel(
             repository,

@@ -26,8 +26,8 @@ class GameOverModule(
     override fun viewModel(): GameOverViewModel =
         GameOverViewModel(
             GameOverRepository.Base(
-                IntCache.Base(core.sharedPreferences, "corrects", 0),
-                IntCache.Base(core.sharedPreferences, "incorrects", 0)
+                core.sharedCollection.correctsInQuiz,
+                core.sharedCollection.incorrectsInQuiz
             ),
             core.clearViewModel
         )

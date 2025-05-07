@@ -23,9 +23,11 @@ interface GameUiState : Serializable, UiState {
 
     fun navigate(navigate: NavigateToGameOver) = Unit
 
-    object Empty : GameUiState
-
+    object Empty : GameUiState {
+        private fun readResolve(): Any = Empty
+    }
     object Finish : GameUiState {
+        private fun readResolve(): Any = Finish
         override fun navigate(navigate: NavigateToGameOver) =
             navigate.navigateToGameOver()
     }

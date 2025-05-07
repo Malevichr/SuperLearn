@@ -12,7 +12,6 @@ import ru.malevichrp.superlearn.core.presentation.AbstractFragment
 import ru.malevichrp.superlearn.core.presentation.Navigate
 import ru.malevichrp.superlearn.databinding.FragmentThemeBinding
 import ru.malevichrp.superlearn.fragments.editTest.NavigateToEditTest
-import ru.malevichrp.superlearn.fragments.theory.NavigateToTheory
 
 class ThemeFragment : AbstractFragment.BindingUi<FragmentThemeBinding>() {
     override fun inflate(inflater: LayoutInflater, container: ViewGroup?): FragmentThemeBinding =
@@ -40,7 +39,7 @@ class ThemeFragment : AbstractFragment.BindingUi<FragmentThemeBinding>() {
             (requireActivity() as GoBack).goBack()
         }
         binding.testButton.setOnClickListener {
-            if(viewModel.isEdit()){
+            if (viewModel.isEdit()) {
                 (requireActivity() as NavigateToEditTest).navigateToEditTest()
             } else
                 (requireActivity() as Navigate).navigateToQuiz()
@@ -50,8 +49,9 @@ class ThemeFragment : AbstractFragment.BindingUi<FragmentThemeBinding>() {
             (requireActivity() as Navigate).navigateToTheory()
         }
         if (savedInstanceState == null) {
-            viewModel.createNewTheme()
-            binding.inputEditText.setText(viewModel.themeText())
+            viewModel.initTheme{
+                binding.inputEditText.setText(it)
+            }
         }
     }
 
