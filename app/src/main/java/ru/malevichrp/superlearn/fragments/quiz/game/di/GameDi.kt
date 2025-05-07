@@ -16,10 +16,10 @@ class GameModule(
         return if (core.runUiTests)
             GameViewModel(
                 repository = GameRepository.Fake(
-                    index = IntCache.Base(core.sharedPreferences, "indexKey", core.size),
-                    userChoiceIndex = IntCache.Base(core.sharedPreferences, "userChoiceIndex", -1),
-                    corrects = IntCache.Base(core.sharedPreferences, "corrects", 0),
-                    incorrects = IntCache.Base(core.sharedPreferences, "incorrects", 0),
+                    index = core.sharedCollection.quizIndex,
+                    userChoiceIndex = core.sharedCollection.userChoiceIndex,
+                    corrects = core.sharedCollection.correctsInQuiz,
+                    incorrects = core.sharedCollection.incorrectsInQuiz,
                     ),
                 clearViewModel = core.clearViewModel,
                 observable = GameUiObservable.Base(),
@@ -28,14 +28,15 @@ class GameModule(
         else
             GameViewModel(
                 repository = GameRepository.Base(
-                    index = IntCache.Base(core.sharedPreferences, "indexKey", core.size),
-                    userChoiceIndex = IntCache.Base(core.sharedPreferences, "userChoiceIndex", -1),
-                    corrects = IntCache.Base(core.sharedPreferences, "corrects", 0),
-                    incorrects = IntCache.Base(core.sharedPreferences, "incorrects", 0),
-                    dao = core.cacheModule.dao(),
-                    clearDatabase = core.cacheModule.clearDatabase(),
-                    size = core.size
-                ),
+                    index = core.sharedCollection.quizIndex,
+                    userChoiceIndex = core.sharedCollection.userChoiceIndex,
+                    corrects = core.sharedCollection.correctsInQuiz,
+                    incorrects = core.sharedCollection.incorrectsInQuiz,
+                    dao = core.quizCacheModule.questionAndChoicesDao(),
+                    clearDatabase = core.quizCacheModule.clearDatabase(),
+                    size = core.size,
+                    targetThemeId = core.sharedCollection.targetThemeId,
+                    ),
                 clearViewModel = core.clearViewModel,
                 observable = GameUiObservable.Base(),
                 runAsync = core.runAsync

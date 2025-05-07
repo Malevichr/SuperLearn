@@ -1,6 +1,5 @@
 package ru.malevichrp.superlearn.fragments.editQuestion
 
-import android.os.SystemClock.sleep
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -20,9 +19,9 @@ class EditQuestionViewModel(
         }
     }
 
-    fun saveQuestion(question: Question) {
+    fun updateQuestion(question: Question) {
         viewModelScope.launch (Dispatchers.IO){
-            repository.saveQuestion(question)
+            repository.updateQuestion(question)
         }
     }
 

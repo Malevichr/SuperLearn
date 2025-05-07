@@ -44,12 +44,12 @@ class LoadModule(private val core: Core) : Module<LoadViewModel> {
                 LoadRepository.Fake()
             else
                 LoadRepository.Base(
-                    core.cacheModule.dao(),
+                    core.quizCacheModule.questionAndChoicesDao(),
                     CloudDataSource.Base(
                         retrofit.create(QuizService::class.java),
                         core.size,
                     ),
-                    core.cacheModule.clearDatabase()
+                    core.quizCacheModule.clearDatabase()
                 ),
             LoadUiObservable.Base(),
             core.runAsync,

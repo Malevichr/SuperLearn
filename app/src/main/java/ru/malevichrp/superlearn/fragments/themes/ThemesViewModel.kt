@@ -3,6 +3,7 @@ package ru.malevichrp.superlearn.fragments.themes
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
 import ru.malevichrp.superlearn.core.presentation.RunAsync
 import ru.malevichrp.superlearn.core.presentation.UiObservable
+import ru.malevichrp.superlearn.views.recycler.TextItems
 
 class ThemesViewModel(
     private val repository: ThemesRepository,
@@ -12,13 +13,13 @@ class ThemesViewModel(
     runAsync,
     uiObservable
 ) {
-    fun navigateToTheme(themeText: String) {
-        repository.changeTargetTheme(themeText, false)
+    fun navigateToTheme(themeId: Int) {
+        repository.changeTargetTheme(themeId, false)
         uiObservable.postUiState(ThemesUiState.NavigateToThemeFragment)
     }
 
     fun createTheme() {
-        repository.changeTargetTheme("New Theme", true)
+        repository.changeTargetTheme(-1, true)
         uiObservable.postUiState(ThemesUiState.NavigateToThemeFragment)
     }
 
@@ -27,7 +28,7 @@ class ThemesViewModel(
             val themes = try {
                 repository.loadThemes()
             } catch (_: Exception) {
-                arrayListOf()
+                TextItems()
             }
 
             if (repository.isEdit())

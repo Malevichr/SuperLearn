@@ -1,5 +1,6 @@
 package ru.malevichrp.superlearn.fragments.editQuestion
 
+import ru.malevichrp.superlearn.core.data.IntCache
 import ru.malevichrp.superlearn.core.data.StringCache
 import ru.malevichrp.superlearn.core.di.Core
 import ru.malevichrp.superlearn.core.di.Module
@@ -20,12 +21,11 @@ class EditQuestionModule(
     private val core: Core
 ) : Module<EditQuestionViewModel> {
     override fun viewModel(): EditQuestionViewModel {
-        val repository = EditQuestionRepository.Fake(
-            targetQuestionText = StringCache.Base(
-                sharedPreferences = core.sharedPreferences,
-                key = "targetQuestionText",
-                defaultValue = "None"
-            )
+        val repository = EditQuestionRepository.Base(
+            targetThemeId = core.sharedCollection.targetThemeId,
+            targetEditQuestionId = core.sharedCollection.targetEditQuestionId,
+
+            questionAndChoicesDao = core.cacheModule.questionAndChoicesDao()
         )
         return EditQuestionViewModel(repository, core.runAsync)
     }

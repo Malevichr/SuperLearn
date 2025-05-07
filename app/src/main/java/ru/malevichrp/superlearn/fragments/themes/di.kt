@@ -1,7 +1,6 @@
 package ru.malevichrp.superlearn.fragments.themes
 
 import ru.malevichrp.superlearn.core.data.BooleanCache
-import ru.malevichrp.superlearn.core.data.StringCache
 import ru.malevichrp.superlearn.core.di.Core
 import ru.malevichrp.superlearn.core.di.Module
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
@@ -20,9 +19,10 @@ class ProvideThemesViewModel(
 
 class ThemesModule(private val core: Core) : Module<ThemesViewModel>{
     override fun viewModel(): ThemesViewModel {
-        val repository = ThemesRepository.Fake(
-            targetIsNew = BooleanCache.Base(core.sharedPreferences, "targetIsNew", false),
-            targetThemeText = StringCache.Base(core.sharedPreferences, "targetThemeText", "New Theme")
+        val repository = ThemesRepository.Base(
+            targetIsNew = core.sharedCollection.targetIsNew,
+            targetThemeId = core.sharedCollection.targetThemeId,
+            learnDao = core.cacheModule.learnDao()
         )
         return ThemesViewModel(
             repository,
