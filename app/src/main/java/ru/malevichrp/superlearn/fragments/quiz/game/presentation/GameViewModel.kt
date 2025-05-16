@@ -1,6 +1,5 @@
 package ru.malevichrp.superlearn.fragments.quiz.game.presentation
 
-import android.util.Log
 import ru.malevichrp.superlearn.core.di.ClearViewModel
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
 import ru.malevichrp.superlearn.core.presentation.RunAsync
@@ -12,13 +11,8 @@ class GameViewModel(
     observable: GameUiObservable,
     private val repository: GameRepository,
     private val clearViewModel: ClearViewModel,
-    private val runAsync: RunAsync
+    runAsync: RunAsync
 ) : MyViewModel.Async.Abstract<GameUiState>(runAsync, observable), MyViewModel {
-
-
-    private val updateUi = { it: GameUiState ->
-        observable.postUiState(it)
-    }
 
     fun chooseFirst(): GameUiState {
         repository.saveUserChoice(0)
@@ -69,7 +63,7 @@ class GameViewModel(
     }
 
     fun check() {
-        handleAsync({
+        handleAsync {
             val correctAndUserChoiceIndexes = repository.check()
 
             val listOfStates: List<ChoiceUiState> = List(4) { i ->
@@ -83,7 +77,6 @@ class GameViewModel(
                 listOfStates
             )
         }
-        )
     }
 
     fun next() {
@@ -104,14 +97,12 @@ class GameViewModel(
             val result = if (firstRun) {
                 try {
                     val data = repository.questionAndChoices()
-                    Log.d("mlvc", data.question)
                     GameUiState.AskedQuestion(
                         data.question,
                         data.listOf
                     )
                 } catch (e: LastQuestionException) {
                     repository.clearProgress()
-                    Log.d("mlvc", "no no")
                     GameUiState.Finish
                 }
             } else

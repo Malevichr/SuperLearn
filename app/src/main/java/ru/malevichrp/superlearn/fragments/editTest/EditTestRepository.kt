@@ -1,6 +1,5 @@
 package ru.malevichrp.superlearn.fragments.editTest
 
-import android.util.Log
 import ru.malevichrp.superlearn.core.data.BooleanCache
 import ru.malevichrp.superlearn.core.data.IntCache
 import ru.malevichrp.superlearn.data.learn.QuestionAndChoicesDao
@@ -44,7 +43,6 @@ interface EditTestRepository {
                 textItems.textTitles.add(it.question)
                 textItems.itemIds.add(it.id)
             }
-            Log.d("mlvc", targetThemeId.read().toString())
 
             return textItems
         }

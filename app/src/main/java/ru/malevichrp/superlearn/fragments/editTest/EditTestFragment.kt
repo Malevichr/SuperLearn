@@ -1,7 +1,6 @@
 package ru.malevichrp.superlearn.fragments.editTest
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import ru.malevichrp.superlearn.core.presentation.AbstractFragment
 import ru.malevichrp.superlearn.core.presentation.Navigate
 import ru.malevichrp.superlearn.databinding.FragmentEditTestBinding
 import ru.malevichrp.superlearn.fragments.editQuestion.NavigateToEditQuestion
-import ru.malevichrp.superlearn.fragments.theme.NavigateToTheme
 import ru.malevichrp.superlearn.views.recycler.TextAdapter
 
 class EditTestFragment :
@@ -21,7 +19,7 @@ class EditTestFragment :
 
     private lateinit var adapter: TextAdapter
     override val update: (EditTestUiState) -> Unit = { uiState ->
-        uiState.update(adapter = adapter)
+        uiState.update(adapter = adapter, visibilityButton = binding.startTestButton)
         uiState.navigate(requireActivity() as NavigateToEditQuestion)
     }
 

@@ -1,6 +1,5 @@
 package ru.malevichrp.superlearn.fragments.theme
 
-import android.util.Log
 import ru.malevichrp.superlearn.core.data.BooleanCache
 import ru.malevichrp.superlearn.core.data.IntCache
 import ru.malevichrp.superlearn.data.learn.LearnDao
@@ -74,12 +73,10 @@ interface ThemeRepository {
                 targetIsNew.save(false)
                 return newTheme
             } else {
-                Log.d("mlvc", targetThemeId.read().toString())
-                var title = ""
-                try {
-                     title = learnDao.themeById(targetThemeId.read()).title
+                val title = try {
+                    learnDao.themeById(targetThemeId.read()).title
                 } catch (_: Exception) {
-                    title = "exception"
+                    "exception"
                 }
                 return title
             }

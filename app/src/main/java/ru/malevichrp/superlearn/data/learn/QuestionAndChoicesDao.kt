@@ -44,4 +44,7 @@ interface QuestionAndChoicesDao {
         themeId: Int,
         index: Int
     ): QuestionCache?
+
+    @Query("DELETE FROM Questions WHERE id = :questionId")
+    suspend fun deleteQuestionById(questionId: Int)
 }

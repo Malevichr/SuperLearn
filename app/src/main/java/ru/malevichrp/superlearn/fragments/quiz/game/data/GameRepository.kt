@@ -1,10 +1,7 @@
 package ru.malevichrp.superlearn.fragments.quiz.game.data
 
-import android.util.Log
-import ru.malevichrp.superlearn.data.learn.ClearDatabase
-import ru.malevichrp.superlearn.data.learn.QuestionAndChoicesDao
 import ru.malevichrp.superlearn.core.data.IntCache
-import java.lang.IllegalStateException
+import ru.malevichrp.superlearn.data.learn.QuestionAndChoicesDao
 
 interface GameRepository {
     suspend fun questionAndChoices(): QuestionAndChoices
@@ -26,20 +23,14 @@ interface GameRepository {
         private val corrects: IntCache,
         private val incorrects: IntCache,
         private val dao: QuestionAndChoicesDao,
-        private val clearDatabase: ClearDatabase,
         private val size: Int,
         private val targetThemeId: IntCache
     ) : GameRepository {
         override suspend fun questionAndChoices(): QuestionAndChoices {
             val question = dao.getQuestionByThemeAndIndex(targetThemeId.read(), index.read())
-                ?: throw LastQuestionException().also {
-                    Log.d(
-                        "mlvc",
-                        targetThemeId.read().toString() + " " +  index.read() + "nothing"
-                    )
-                }
+                ?: throw LastQuestionException()
             val incorrects = dao.incorects(question.id)
-            val choices = (listOf(question.correctAnswer) + incorrects.map { it.choice }).shuffled()
+            val choices = (listOf(question.correctAnswer) + incorrects.map { it.choice })
 
             return QuestionAndChoices(
                 question.question,
