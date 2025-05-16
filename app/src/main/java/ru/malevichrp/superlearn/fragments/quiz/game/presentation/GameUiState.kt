@@ -1,12 +1,12 @@
 package ru.malevichrp.superlearn.fragments.quiz.game.presentation
 
+import ru.malevichrp.superlearn.core.presentation.UiState
 import ru.malevichrp.superlearn.fragments.quiz.gameover.presentation.NavigateToGameOver
 import ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.ChoiceUiState
 import ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.UpdateChoiceButton
 import ru.malevichrp.superlearn.fragments.quiz.views.questiontextview.UpdateText
 import ru.malevichrp.superlearn.fragments.quiz.views.visibilitybutton.UpdateVisibility
 import ru.malevichrp.superlearn.fragments.quiz.views.visibilitybutton.VisibilityUiState
-import ru.malevichrp.superlearn.core.presentation.UiState
 import java.io.Serializable
 
 interface GameUiState : Serializable, UiState {
@@ -26,10 +26,12 @@ interface GameUiState : Serializable, UiState {
     object Empty : GameUiState {
         private fun readResolve(): Any = Empty
     }
+
     object Finish : GameUiState {
         private fun readResolve(): Any = Finish
-        override fun navigate(navigate: NavigateToGameOver) =
-            navigate.navigateToGameOver()
+        override fun navigate(navigate: NavigateToGameOver) {
+            return navigate.navigateToGameOver()
+        }
     }
 
     data class AskedQuestion(

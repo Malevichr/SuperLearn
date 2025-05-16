@@ -14,30 +14,36 @@ class EditQuestionViewModel(
     private val viewModelScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     fun deleteQuestion() {
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             repository.deleteTargetQuestion()
         }
     }
 
     fun updateQuestion(question: Question) {
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updateQuestion(question)
         }
     }
 
-    fun initQuestion(callback: (Question) -> Unit) {
-        runAsync.runAsync(
-            viewModelScope,
-            heavyOperation = {
-                repository.targetQuestion()
-            },
-            uiUpdate = {
-                callback.invoke(it)
-            }
-        )
+    fun initQuestion(callback: (Question) -> Unit, isFirstRun: Boolean = true) {
+        if (isFirstRun) {
+            runAsync.runAsync(
+                viewModelScope,
+                heavyOperation = {
+                    repository.targetQuestion()
+                },
+                uiUpdate = {
+                    callback.invoke(it)
+                }
+            )
+        }
     }
 
-    fun addNewQuestion(callback: (Question) -> Unit) {
-
+    fun addNewQuestion(oldQuestion: Question, callback: (Question) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateQuestion(oldQuestion)
+            repository.createNew()
+            initQuestion(callback)
+        }
     }
 }

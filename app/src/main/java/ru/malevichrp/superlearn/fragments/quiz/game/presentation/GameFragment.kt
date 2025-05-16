@@ -8,7 +8,6 @@ import ru.malevichrp.superlearn.core.di.ProvideViewModel
 import ru.malevichrp.superlearn.core.presentation.AbstractFragment
 import ru.malevichrp.superlearn.databinding.FragmentGameBinding
 import ru.malevichrp.superlearn.fragments.quiz.gameover.presentation.NavigateToGameOver
-import ru.malevichrp.superlearn.fragments.quiz.views.visibilitybutton.UpdateVisibility
 
 class GameFragment : AbstractFragment.Async<GameUiState, GameViewModel, FragmentGameBinding>() {
 

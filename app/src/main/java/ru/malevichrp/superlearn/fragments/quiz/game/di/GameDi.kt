@@ -1,13 +1,12 @@
 package ru.malevichrp.superlearn.fragments.quiz.game.di
 
-import ru.malevichrp.superlearn.fragments.quiz.game.presentation.GameUiObservable
-import ru.malevichrp.superlearn.fragments.quiz.game.presentation.GameViewModel
-import ru.malevichrp.superlearn.core.data.IntCache
 import ru.malevichrp.superlearn.core.di.Core
 import ru.malevichrp.superlearn.core.di.Module
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
 import ru.malevichrp.superlearn.fragments.quiz.game.data.GameRepository
+import ru.malevichrp.superlearn.fragments.quiz.game.presentation.GameUiObservable
+import ru.malevichrp.superlearn.fragments.quiz.game.presentation.GameViewModel
 
 class GameModule(
     private val core: Core
@@ -33,7 +32,6 @@ class GameModule(
                     corrects = core.sharedCollection.correctsInQuiz,
                     incorrects = core.sharedCollection.incorrectsInQuiz,
                     dao = core.quizCacheModule.questionAndChoicesDao(),
-                    clearDatabase = core.quizCacheModule.clearDatabase(),
                     size = core.size,
                     targetThemeId = core.sharedCollection.targetThemeId,
                     ),

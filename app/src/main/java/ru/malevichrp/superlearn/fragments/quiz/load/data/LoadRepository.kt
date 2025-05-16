@@ -1,12 +1,11 @@
 package ru.malevichrp.superlearn.fragments.quiz.load.data
 
-import ru.malevichrp.superlearn.data.learn.ClearDatabase
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.CloudDataSource
+import kotlinx.coroutines.delay
+import okio.IOException
 import ru.malevichrp.superlearn.data.learn.IncorrectCache
 import ru.malevichrp.superlearn.data.learn.QuestionAndChoicesDao
 import ru.malevichrp.superlearn.data.learn.QuestionCache
-import kotlinx.coroutines.delay
-import okio.IOException
+import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.CloudDataSource
 
 interface LoadRepository {
 
@@ -15,12 +14,10 @@ interface LoadRepository {
     class Base(
         private val dao: QuestionAndChoicesDao,
         private val cloudDataSource: CloudDataSource,
-        private val clearDatabase: ClearDatabase
     ) : LoadRepository {
         override suspend fun load() {
             try {
                 val dataList = cloudDataSource.load()
-                clearDatabase.clear()
                 val questions: List<QuestionCache> =
                     dataList.mapIndexed { index, data ->
                         val incorrects: List<IncorrectCache> =

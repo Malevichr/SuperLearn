@@ -7,9 +7,9 @@ import ru.malevichrp.superlearn.data.learn.QuestionCache
 
 interface EditQuestionRepository {
     suspend fun targetQuestion(): Question
-    fun deleteTargetQuestion()
+    suspend fun deleteTargetQuestion()
     suspend fun updateQuestion(question: Question)
-
+    fun createNew()
 
     class Base(
         private val targetThemeId: IntCache,
@@ -60,7 +60,9 @@ interface EditQuestionRepository {
 
         }
 
-        override fun deleteTargetQuestion() {
+        override suspend fun deleteTargetQuestion() {
+            questionAndChoicesDao.deleteQuestionById(targetEditQuestionId.read())
+            targetEditQuestionId.default()
         }
 
         override suspend fun updateQuestion(question: Question) {
@@ -88,6 +90,10 @@ interface EditQuestionRepository {
             }
 
             questionAndChoicesDao.updateIncorrects(newIncorrects)
+        }
+
+        override fun createNew() {
+            targetEditQuestionId.default()
         }
     }
 }

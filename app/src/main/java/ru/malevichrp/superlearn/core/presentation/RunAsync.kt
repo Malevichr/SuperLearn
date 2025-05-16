@@ -1,6 +1,5 @@
 package ru.malevichrp.superlearn.core.presentation
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +21,6 @@ interface RunAsync {
             coroutineScope.launch(Dispatchers.IO) {
                 val result = heavyOperation.invoke()
                 withContext(Dispatchers.Main) {
-                    Log.d("mlvc", "trying to show")
                     uiUpdate.invoke(result)
                 }
             }

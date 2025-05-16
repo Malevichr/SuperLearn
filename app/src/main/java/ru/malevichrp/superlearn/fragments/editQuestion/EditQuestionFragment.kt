@@ -32,8 +32,8 @@ class EditQuestionFragment : AbstractFragment.BindingUi<FragmentEditQuestionBind
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = (requireActivity() as ProvideViewModel).provideViewModel(EditQuestionViewModel::class.java)
-        val saveAction = {
-            val question = Question(
+        val readQuestion: () -> Question = {
+            Question(
                 binding.editQuestionInput.text.toString(),
                 binding.firstAnswerInput.text.toString(),
                 binding.secondAnswerInput.text.toString(),
@@ -41,12 +41,10 @@ class EditQuestionFragment : AbstractFragment.BindingUi<FragmentEditQuestionBind
                 binding.fourthAnswerInput.text.toString(),
                 rightAnswerIndex
             )
-            viewModel.updateQuestion(
-                question = question
-            )
         }
         binding.backButton.setOnClickListener {
-            saveAction()
+            val question = readQuestion()
+            viewModel.updateQuestion(question)
             (requireActivity() as GoBack).goBack()
         }
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -58,15 +56,14 @@ class EditQuestionFragment : AbstractFragment.BindingUi<FragmentEditQuestionBind
             }
         }
         binding.saveButton.setOnClickListener {
-            saveAction()
-            viewModel.addNewQuestion(callback = update)
+            val question = readQuestion()
+            viewModel.addNewQuestion(question, callback = update)
         }
         binding.deleteButton.setOnClickListener {
             viewModel.deleteQuestion()
             (requireActivity() as GoBack).goBack()
         }
 
-
-        viewModel.initQuestion(callback = update)
+        viewModel.initQuestion(callback = update, savedInstanceState == null)
     }
 }
