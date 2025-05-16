@@ -1,8 +1,5 @@
 package ru.malevichrp.superlearn.fragments.quiz.load.di
 
-import ru.malevichrp.superlearn.fragments.quiz.load.data.LoadRepository
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.CloudDataSource
-import ru.malevichrp.superlearn.fragments.quiz.load.data.cloud.QuizService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,6 +8,9 @@ import ru.malevichrp.superlearn.core.di.Core
 import ru.malevichrp.superlearn.core.di.Module
 import ru.malevichrp.superlearn.core.di.ProvideViewModel
 import ru.malevichrp.superlearn.core.presentation.MyViewModel
+import ru.malevichrp.superlearn.fragments.quiz.load.data.LoadRepository
+import ru.malevichrp.superlearn.fragments.quiz.load.data.cache.CloudDataSource
+import ru.malevichrp.superlearn.fragments.quiz.load.data.cloud.QuizService
 import ru.malevichrp.superlearn.fragments.quiz.load.presentation.LoadUiObservable
 import ru.malevichrp.superlearn.fragments.quiz.load.presentation.LoadViewModel
 import java.util.concurrent.TimeUnit
@@ -49,7 +49,6 @@ class LoadModule(private val core: Core) : Module<LoadViewModel> {
                         retrofit.create(QuizService::class.java),
                         core.size,
                     ),
-                    core.quizCacheModule.clearDatabase()
                 ),
             LoadUiObservable.Base(),
             core.runAsync,
