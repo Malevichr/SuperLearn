@@ -29,14 +29,7 @@ interface GameRepository {
         override suspend fun questionAndChoices(): QuestionAndChoices {
             val question = dao.getQuestionByThemeAndIndex(targetThemeId.read(), index.read())
                 ?: throw LastQuestionException()
-            val incorrects = dao.incorects(question.id)
-            val choices = (listOf(question.correctAnswer) + incorrects.map { it.choice })
-
-            return QuestionAndChoices(
-                question.question,
-                choices,
-                choices.indexOf(question.correctAnswer)
-            )
+            return question.toQuestionAndChoices()
         }
 
         override fun saveUserChoice(index: Int) {

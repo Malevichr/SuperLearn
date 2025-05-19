@@ -14,14 +14,9 @@ interface QuestionAndChoicesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveQuestion(question: QuestionCache) : Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveIncorrects(incorects: List<IncorrectCache>)
-
     @Query("SELECT * FROM Questions WHERE id =:id")
     suspend fun question(id: Int): QuestionCache
 
-    @Query("SELECT * FROM Incorrects WHERE question_id = :questionId")
-    suspend fun incorects(questionId: Int): List<IncorrectCache>
 
     @Query("SELECT * FROM Questions WHERE theme_id =:themeId")
     suspend fun questionsByParent(themeId: Int): List<QuestionCache>
@@ -29,8 +24,6 @@ interface QuestionAndChoicesDao {
     @Update
     suspend fun updateQuestion(question: QuestionCache)
 
-    @Update
-    suspend fun updateIncorrects(incorrects: List<IncorrectCache>)
 
     @Query(
         """

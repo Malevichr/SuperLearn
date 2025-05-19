@@ -8,6 +8,7 @@ import ru.malevichrp.superlearn.fragments.quiz.gameover.di.ProvideGameOverViewMo
 import ru.malevichrp.superlearn.fragments.quiz.load.di.ProvideLoadViewModel
 import ru.malevichrp.superlearn.fragments.theme.ProvideThemeViewModel
 import ru.malevichrp.superlearn.fragments.themes.ProvideThemesViewModel
+import ru.malevichrp.superlearn.fragments.theory.ProvideTheoryViewModel
 
 interface ProvideViewModel {
     fun <T : MyViewModel> provideViewModel(clazz: Class<T>): T
@@ -25,6 +26,7 @@ interface ProvideViewModel {
             chain = ProvideGameViewModel(core, chain)
             chain = ProvideGameOverViewModel(core, chain)
             chain = ProvideLoadViewModel(core, chain)
+            chain = ProvideTheoryViewModel(core, chain)
         }
 
         override fun <T : MyViewModel> provideViewModel(clazz: Class<T>): T =
