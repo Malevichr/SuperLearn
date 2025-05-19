@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.questiontextview.QuestionTextView
+        android:id="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:freezesText="true"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:text="Question" />
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.ChoiceButton
+        android:id="@+id/firstChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        tools:text="first choice" />
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.ChoiceButton
+        android:id="@+id/secondChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        tools:text="second choice" />
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.ChoiceButton
+        android:id="@+id/thirdChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        tools:text="third choice" />
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.choicebutton.ChoiceButton
+        android:id="@+id/forthChoiceButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        tools:text="forth choice" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1" />
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.visibilitybutton.VisibilityButton
+        android:id="@+id/checkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="#C553BD"
+        android:text="@string/check" />
+
+    <ru.malevichrp.superlearn.fragments.quiz.views.visibilitybutton.VisibilityButton
+        android:id="@+id/nextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="#5358C5"
+        android:text="@string/next" />
+</LinearLayout>
