@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     androidTestImplementation(libs.androidx.room.testing)
-
+    implementation(libs.picasso)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)

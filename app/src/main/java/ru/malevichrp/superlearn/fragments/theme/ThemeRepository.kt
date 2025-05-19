@@ -1,5 +1,6 @@
 package ru.malevichrp.superlearn.fragments.theme
 
+import android.util.Log
 import ru.malevichrp.superlearn.core.data.BooleanCache
 import ru.malevichrp.superlearn.core.data.IntCache
 import ru.malevichrp.superlearn.data.learn.LearnDao
@@ -37,6 +38,7 @@ interface ThemeRepository {
                 targetIsNew.save(false)
                 return "New Theme"
             }
+
             return "themeText()"
         }
     }
@@ -54,6 +56,7 @@ interface ThemeRepository {
                     text
                 )
             )
+            Log.d("mlvc", "theme  = ${targetThemeId.read()}")
         }
 
         override suspend fun deleteTargetTheme() {
@@ -71,6 +74,7 @@ interface ThemeRepository {
                 )
                 targetThemeId.save(id.toInt())
                 targetIsNew.save(false)
+
                 return newTheme
             } else {
                 val title = try {
@@ -80,7 +84,6 @@ interface ThemeRepository {
                 }
                 return title
             }
-
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.room.Room
 interface LearnCacheModule {
     fun questionAndChoicesDao(): QuestionAndChoicesDao
     fun learnDao(): LearnDao
+    fun theoryDao(): TheoryDao
     fun clearDatabase(): ClearDatabase
     class Base(applicationContext: Context) :
         LearnCacheModule {
@@ -26,6 +27,11 @@ interface LearnCacheModule {
         override fun learnDao(): LearnDao {
             return database.learnDao()
         }
+
+        override fun theoryDao(): TheoryDao {
+            return database.theoryDao()
+        }
+
 
         override fun clearDatabase(): ClearDatabase = database
     }

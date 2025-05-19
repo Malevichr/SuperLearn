@@ -1,7 +1,6 @@
 package ru.malevichrp.superlearn.data.learn
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -10,9 +9,6 @@ import androidx.room.Update
 interface LearnDao {
     @Insert
     suspend fun insertTheme(theme: ThemeCache): Long
-
-    @Delete
-    suspend fun deleteTheme(theme: ThemeCache)
 
     @Update
     suspend fun updateTheme(theme: ThemeCache)

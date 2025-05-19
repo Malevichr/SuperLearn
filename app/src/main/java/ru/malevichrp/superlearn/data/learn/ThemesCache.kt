@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.PrimaryKey
+import ru.malevichrp.superlearn.fragments.theory.TheoryItem
 
 @Entity("Themes")
 class ThemeCache(
@@ -30,5 +31,16 @@ class TheoryCache(
     @ColumnInfo("theme_id")
     val themeId: Int,
     @ColumnInfo("content")
-    val content: String
-)
+    val content: String = "",
+    @ColumnInfo("uri")
+    val uri: String = "",
+    @ColumnInfo("is_image")
+    val isImage: Boolean
+) {
+    fun toTheoryItem(): TheoryItem = TheoryItem(
+        text = content,
+        uri = uri,
+        isImage = isImage,
+        id = id
+    )
+}

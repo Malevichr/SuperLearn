@@ -1,6 +1,5 @@
 package ru.malevichrp.superlearn.core.presentation
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -16,7 +15,7 @@ interface MyViewModel {
             private val runAsync: RunAsync,
             protected val observable: UiObservable<T>
         ) : Async<T> {
-            private val viewModelScope =
+            protected val viewModelScope =
                 CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
             private val updateUi = { uiState: T ->
